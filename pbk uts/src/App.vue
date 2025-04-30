@@ -1,6 +1,5 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue';
-import HelloWorld from './components/HelloWorld.vue';
 
 const activities = ref([]);
 const newActivity = ref('');
@@ -16,6 +15,14 @@ function addActivity() {
 
 function removeActivity(index) {
   activities.value.splice(index, 1);
+}
+
+function markAllAsDone() {
+  activities.value.forEach(activity => {
+    if (!activity.done) {
+      activity.done = true;
+    }
+  });
 }
 
 const filteredActivities = computed(() => {
@@ -79,14 +86,16 @@ onMounted(() => {
       <div class="filter-section">
         <label>
           <input type="checkbox" v-model="showUnfinishedOnly" />
-        Kegiatan yang belum selesai
+          Kegiatan yang belum selesai
         </label>
       </div>
+
+      <button @click="markAllAsDone" class="mark-all-done-btn">Tandai Semua Selesai</button>
 
       <ul class="activity-list">
         <li v-for="(activity, index) in filteredActivities" :key="index" class="activity-item">
           <label>
-            <input type="checkbox" v-model="activity.done" />cd
+            <input type="checkbox" v-model="activity.done" />
             <span :class="{ done: activity.done }">{{ activity.name }}</span>
           </label>
           <button class="delete-btn" @click="removeActivity(index)">Hapus</button>
@@ -97,7 +106,6 @@ onMounted(() => {
 </template>
 
 <style scoped>
-
 #star-canvas {
   position: fixed;
   top: 0;
@@ -107,7 +115,6 @@ onMounted(() => {
   z-index: 0;
   background: linear-gradient(to bottom, #001d3d, #003566);
 }
-
 
 .app-wrapper {
   position: relative;
@@ -223,6 +230,26 @@ onMounted(() => {
 
 .delete-btn:hover {
   background: linear-gradient(135deg, #e53935, #c62828);
+  transform: translateY(-2px);
+}
+
+.mark-all-done-btn {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(135deg, #66bb6a, #388e3c);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(56, 142, 108, 0.5);
+  transition: all 0.3s ease;
+  margin-bottom: 20px;
+}
+
+.mark-all-done-btn:hover {
+  background: linear-gradient(135deg, #388e3c, #2c6f2e);
   transform: translateY(-2px);
 }
 </style>
