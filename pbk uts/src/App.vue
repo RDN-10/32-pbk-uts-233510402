@@ -101,6 +101,10 @@ onMounted(() => {
           <button class="delete-btn" @click="removeActivity(index)">Hapus</button>
         </li>
       </ul>
+      
+      <div class="footer">
+        <p>Made by RDN</p>
+      </div>
     </div>
   </div>
 </template>
@@ -251,5 +255,9 @@ onMounted(() => {
 .mark-all-done-btn:hover {
   background: linear-gradient(135deg, #388e3c, #2c6f2e);
   transform: translateY(-2px);
+}
+
+.footer {
+  color:#1565c0;
 }
 </style>
