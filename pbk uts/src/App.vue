@@ -98,10 +98,12 @@ onMounted(() => {
             <input type="checkbox" v-model="activity.done" />
             <span :class="{ done: activity.done }">{{ activity.name }}</span>
           </label>
-          <button class="delete-btn" @click="removeActivity(index)">Hapus</button>
+          <button class="delete-btn" @click="removeActivity(index)">
+            <i class="fas fa-trash"></i>
+          </button>
         </li>
       </ul>
-      
+
       <div class="footer">
         <p>Made by RDN</p>
       </div>
@@ -110,6 +112,8 @@ onMounted(() => {
 </template>
 
 <style scoped>
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css');
+
 #star-canvas {
   position: fixed;
   top: 0;
@@ -230,6 +234,13 @@ onMounted(() => {
   font-weight: bold;
   box-shadow: 0 4px 10px rgba(229, 57, 53, 0.5);
   transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.delete-btn i {
+  font-size: 16px;
 }
 
 .delete-btn:hover {
@@ -258,6 +269,6 @@ onMounted(() => {
 }
 
 .footer {
-  color:#1565c0;
+  color: #1565c0;
 }
 </style>
